@@ -1,0 +1,29 @@
+__pycache__
+.DS_Store
+.cache
+.eggs
+.pytest_cache
+.tox
+build
+dist
+*.egg-info
+*.pyc
+
+# IDE Specific files
+### Pycharm IDE - Jetbrains
+.idea/*
+.vscode/*
+
+### PyDev IDE - Eclipse
+.metadata
+tmp/
+*.tmp
+*.bak
+local.properties
+.settings/
+.loadpath
+*.project
+*.pydevproject
+
+Pipfile.lock
+*.lock
