@@ -4,7 +4,7 @@
 :copyright: (c) 2020 by Jussi Vatjus-Anttila
 :license: MIT, see LICENSE for more details.
 """
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 CLASSIFIERS = """
@@ -24,7 +24,7 @@ Framework :: Robot Framework :: Library
 setup(
     name='robot-lockable',
     use_scm_version=True,
-    packages=['robot-lockable'],
+    packages=find_packages(exclude=['tests']),  # Required
     url='https://github.com/jupe/robot-lockable',
     license='MIT',
     author='Jussi Vatjus-Anttila',
