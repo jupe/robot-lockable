@@ -1,3 +1,7 @@
+"""
+Robot-Remote library for remote lockable resources
+"""
+
 import subprocess
 import time
 import socket
@@ -23,15 +27,32 @@ class RemoteLockable:
         logger.info('Initialize server')
 
     #@Lockable.auto_unlock
-    def lock(self, requirements={}, timeout_s=1000, alloc_time_s=100):
+    def lock(self, requirements=dict(), timeout_s=1000, alloc_time_s=100):
+        """
+        Lock resource using given arguments
+        :param requirements: resource requirements
+        :param timeout_s: allocation timeout
+        :param alloc_time_s: allocation max time
+        :return: resource info object
+        """
         return self._lockable.lock(requirements, timeout_s, alloc_time_s).resource_info
 
     def unlock(self, resource):
+        """
+        Unlock resource
+        :param resource: resource object to be release. Should contains at least `id` -property.
+        :return: None
+        """
         print('resource:', resource)
         self._lockable.unlock(resource)
 
 
 def generate_doc(doc):
+    """
+    Generate remote-library documentation
+    :param doc: output filename
+    :return: 0 if success.
+    """
     cmd = f"python -m robot.libdoc Remote::http://127.0.0.1:8270 {doc}"
     server = subprocess.Popen(("python", __file__), stdout=subprocess.PIPE)
     time.sleep(1)

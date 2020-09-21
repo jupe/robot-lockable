@@ -1,4 +1,4 @@
-""" Lockable plugin for pytest """
+""" Lockable plugin for robot-framework """
 import random
 import json
 import socket
@@ -17,6 +17,9 @@ from dataclasses import dataclass
 
 @dataclass
 class Reservation:
+    """
+    Reservation dataclass
+    """
     requirements: dict
     resource_info: dict
     release: callable
@@ -24,6 +27,7 @@ class Reservation:
 
     @property
     def id(self):
+        """ resource id getter """
         return self.resource_info['id']
 
 
@@ -38,6 +42,9 @@ class ResourceNotFound(Exception):
 
 
 class Lockable:
+    """
+    Base class for Lockable. It handle low-level functionality.
+    """
     def __init__(self, hostname=socket.gethostname(),
                  resource_list_file="resources.json",
                  lock_folder=tempfile.gettempdir()):
@@ -166,10 +173,10 @@ class Lockable:
 
     def unlock(self, resource):
         print('resource:', resource)
-        id = resource['id']
-        ResourceNotFound.invariant(id in self._resources.keys(), 'resource not locked')
-        reservation = self._resources[id]
-        del self._resources[id]
+        resource_id = resource['id']
+        ResourceNotFound.invariant(resource_id in self._resources.keys(), 'resource not locked')
+        reservation = self._resources[resource_id]
+        del self._resources[resource_id]
         reservation.release()
         '''task = reservation.task
         task.cancel()
@@ -179,6 +186,7 @@ class Lockable:
             print("main(): cancel_me is cancelled now")
         '''
 
+    @staticmethod
     @contextmanager
     def auto_unlock(func):
         @functools.wraps(func)
