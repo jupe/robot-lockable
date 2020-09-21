@@ -46,7 +46,6 @@ commands:
             . venv/bin/activate;
             pip install -e .;
             pip install -e .[dev]
-            pip install -e .[optional]
       - save_cache:
           paths:
             - ./venv
@@ -65,7 +64,7 @@ jobs:
           command: |
             mkdir junit || true
             . venv/bin/activate;
-            nosetests --with-xunit --with-coverage --cover-package=lockable --cover-html --cover-html-dir=htmlcov --cover-xml-file=coverage.xml --xunit-file=junit/results.xml
+            nosetests --with-xunit --with-coverage --cover-package=RobotLockable --cover-html --cover-html-dir=htmlcov --cover-xml-file=coverage.xml --xunit-file=junit/results.xml
             coveralls || true
       - run:
           name: pylint

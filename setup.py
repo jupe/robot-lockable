@@ -12,6 +12,9 @@ Development Status :: 3 - Alpha
 Topic :: Software Development :: Testing
 Operating System :: OS Independent
 License :: OSI Approved :: Apache Software License
+Operating System :: POSIX
+Operating System :: Microsoft :: Windows
+Operating System :: MacOS :: MacOS X
 Programming Language :: Python
 Programming Language :: Python :: 3
 Programming Language :: Python :: 3.6
@@ -34,11 +37,19 @@ setup(
     long_description_content_type='text/markdown',
     classifiers=CLASSIFIERS,
     setup_requires=["setuptools_scm"],
-    install_requires=["robotframework", "func_timeout", "filelock", "pydash", "click", "robotremoteserver", "asyncio"],
+    install_requires=[
+        "robotframework",
+        "func_timeout",
+        "filelock",
+        "pydash",
+        "click",
+        "robotremoteserver",
+        "asyncio"
+    ],
     extras_require={  # Optional
         'dev': ['coverage', 'coveralls', 'mock', 'pylint', 'nose', 'pyinstaller']
     },
-    keywords="robot-framework opentmi report",
+    keywords="robot-framework lockable framework resource",
     python_requires=">=3.6",
     project_urls={  # Optional
         'Bug Reports': 'https://github.com/jupe/robot-lockable',
