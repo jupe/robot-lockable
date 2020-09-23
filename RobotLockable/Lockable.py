@@ -57,8 +57,11 @@ class Lockable:
     def read_resources_list(filename):
         """ Read resources json file """
         with open(filename) as json_file:
-            data = json.load(json_file)
-            assert isinstance(data, list), 'data is not an list'
+            try:
+                data = json.load(json_file)
+                assert isinstance(data, list), 'data is not an list'
+            except (json.decoder.JSONDecodeError, AssertionError) as error:
+                raise ValueError(f'invalid resources json file: {error}')
             Lockable.validate_json(data)
         return data
 
