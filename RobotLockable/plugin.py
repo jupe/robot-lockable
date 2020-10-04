@@ -3,11 +3,12 @@ Locking keywords for robot-framework for local usage
 """
 import socket
 import tempfile
+from lockable import Lockable
 from RobotLockable import __version__
-from lockable import Lockable, ResourceNotFound
 
 
 class RobotLockable:
+    """ RobotFramework Lockable plugin """
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     ROBOT_LIBRARY_VERSION = __version__
 

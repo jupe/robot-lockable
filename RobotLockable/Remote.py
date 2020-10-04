@@ -26,15 +26,14 @@ class RemoteLockable:
                                   lock_folder=lock_folder)
         logger.info('Initialize server')
 
-    def lock(self, requirements=dict(), timeout_s=1000, alloc_time_s=100):
+    def lock(self, requirements, timeout_s=1000):
         """
         Lock resource using given arguments
-        :param requirements: resource requirements
+        :param requirements: resource requirements as string or dict
         :param timeout_s: allocation timeout
-        :param alloc_time_s: allocation max time
         :return: resource info object
         """
-        return self._lockable.lock(requirements, timeout_s, alloc_time_s).resource_info
+        return self._lockable.lock(requirements, timeout_s).resource_info
 
     def unlock(self, resource):
         """
@@ -66,6 +65,7 @@ def generate_doc(doc):
                                                   'Use "0.0.0.0" to get access from external machines')
 @click.option('--doc', help='generate documentation. E.g. doc.html or list')
 def main(port, host, doc):
+    """ main function for remote plugin """
     if doc:
         sys.exit(generate_doc(doc))
     RobotRemoteServer(RemoteLockable(), port=port, host=host, allow_remote_stop=False)
