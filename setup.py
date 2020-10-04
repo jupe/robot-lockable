@@ -39,9 +39,7 @@ setup(
     setup_requires=["setuptools_scm"],
     install_requires=[
         "robotframework",
-        "func_timeout",
-        "filelock",
-        "pydash",
+        "lockable",
         "click",
         "robotremoteserver",
         "asyncio"

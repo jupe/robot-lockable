@@ -10,7 +10,7 @@ import sys
 import click
 from robotremoteserver import RobotRemoteServer
 from robot.api import logger
-from RobotLockable.Lockable import Lockable
+from lockable import Lockable
 
 
 class RemoteLockable:
@@ -26,7 +26,6 @@ class RemoteLockable:
                                   lock_folder=lock_folder)
         logger.info('Initialize server')
 
-    #@Lockable.auto_unlock
     def lock(self, requirements=dict(), timeout_s=1000, alloc_time_s=100):
         """
         Lock resource using given arguments

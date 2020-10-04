@@ -4,11 +4,7 @@ Locking keywords for robot-framework for local usage
 import socket
 import tempfile
 from RobotLockable import __version__
-from RobotLockable.Lockable import Lockable
-
-
-class ResourceNotFound(Exception):
-    """ Exception raised when resource not found """
+from lockable import Lockable, ResourceNotFound
 
 
 class RobotLockable:
@@ -40,7 +36,7 @@ class RobotLockable:
         :param timeout_s: timeout for allocation
         :return: Resource object
         """
-        return self._lockable.lock(requirements, timeout_s)
+        return self._lockable.lock(requirements, timeout_s).resource_info
 
     def unlock(self, resource):
         """
