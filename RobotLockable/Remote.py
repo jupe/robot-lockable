@@ -26,7 +26,7 @@ class RemoteLockable:
                                   lock_folder=lock_folder)
         logger.info('Initialize server')
 
-    def lock(self, requirements, timeout_s=1000):
+    def lock(self, requirements, timeout_s=60):
         """
         Lock resource using given arguments
         :param requirements: resource requirements as string or dict
@@ -64,7 +64,7 @@ def generate_doc(doc):
 @click.option('--host', default='127.0.0.1', help='Interface to listen. '
                                                   'Use "0.0.0.0" to get access from external machines')
 @click.option('--hostname', default=socket.gethostname(), help='Hostname')
-@click.option('--resources_list_file', default='resources.json', help='Resources list file')
+@click.option('--resources_list_file', default='resource.json', help='Resources list file')
 @click.option('--lock_folder', default='.', help='Lock folder')
 @click.option('--doc', help='generate documentation. E.g. doc.html or list')
 # pylint:disable=too-many-arguments
