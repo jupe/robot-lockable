@@ -45,6 +45,11 @@ setup(
         "robotremoteserver",
         "asyncio"
     ],
+    entry_points={
+        'console_scripts': [
+            'robot_lockable = RobotLockable.Remote:main'
+        ]
+    },
     extras_require={  # Optional
         'dev': ['coverage', 'coveralls', 'mock', 'pylint', 'nose', 'pyinstaller']
     },
