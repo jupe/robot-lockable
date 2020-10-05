@@ -76,7 +76,7 @@ jobs:
           command: |
             . venv/bin/activate;
             cd example;
-            robot --allocation_hostname localhost -s --allocation_lock_folder .
+            robot local.robot
       - store_artifacts:
           path: htmlcov
           destination: htmlcov
