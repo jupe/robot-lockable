@@ -67,6 +67,7 @@ def generate_doc(doc):
 @click.option('--resources_list_file', default='resources.json', help='Resources list file')
 @click.option('--lock_folder', default='.', help='Lock folder')
 @click.option('--doc', help='generate documentation. E.g. doc.html or list')
+# pylint:disable=too-many-arguments
 def main(port, host, hostname, resources_list_file, lock_folder, doc):
     """ main function for remote plugin """
     if doc:
