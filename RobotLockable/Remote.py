@@ -14,8 +14,8 @@ from lockable import Lockable
 
 
 class RemoteLockable:
-    """Remote Ring interface for Robot tests
-    This provide ring keywords
+    """Remote Lockable interface for Robot tests
+    This provide general locking keywords
     """
 
     def __init__(self, hostname=socket.gethostname(),
