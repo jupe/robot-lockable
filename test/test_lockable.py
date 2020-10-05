@@ -18,7 +18,7 @@ resources_list_file = abspath(join(root_dir, 'example/resource.json'))
 
 
 @retry((ConnectionError, HTTPError), tries=3, delay=2)
-def test_response(uri):
+def wait_response(uri):
     print(f'verify uri {uri} returns')
     response = requests.get(uri)
     print(f'uri responses: {response}')
@@ -32,7 +32,7 @@ def remote_server():
                                 '--hostname', 'localhost',
                                 '--resources_list_file', resources_list_file
                                 ])
-    test_response('http://127.0.0.1:8270')
+    wait_response('http://127.0.0.1:8270')
     print('run test against remote server')
     yield process
     # kill remote server
