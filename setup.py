@@ -41,6 +41,7 @@ setup(
         "robotframework",
         "lockable==0.2.0",
         "click",
+        "retry",
         "robotremoteserver",
         "asyncio"
     ],
