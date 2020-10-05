@@ -11,4 +11,4 @@ except DistributionNotFound:
 __pypi_url__ = "https://pypi.python.org/pypi/robot-lockable"
 __robot_info__ = get_distribution("robotframework")
 
-from RobotLockable.plugin import RobotLockable  # pylint: disable=wrong-import-position
+from RobotLockable.RobotLockable import RobotLockable  # pylint: disable=wrong-import-position
