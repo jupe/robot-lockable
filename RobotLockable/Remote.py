@@ -63,12 +63,16 @@ def generate_doc(doc):
 @click.option('--port', default=8270, help='RemoteLockable server Port')
 @click.option('--host', default='127.0.0.1', help='Interface to listen. '
                                                   'Use "0.0.0.0" to get access from external machines')
+@click.option('--hostname', default=socket.gethostname(), help='Hostname')
+@click.option('--resources_list_file', default='resources.json', help='Resources list file')
+@click.option('--lock_folder', default='.', help='Lock folder')
 @click.option('--doc', help='generate documentation. E.g. doc.html or list')
-def main(port, host, doc):
+def main(port, host, hostname, resources_list_file, lock_folder, doc):
     """ main function for remote plugin """
     if doc:
         sys.exit(generate_doc(doc))
-    RobotRemoteServer(RemoteLockable(), port=port, host=host, allow_remote_stop=False)
+    remote = RemoteLockable(hostname=hostname, resource_list_file=resources_list_file, lock_folder=lock_folder)
+    RobotRemoteServer(remote, port=port, host=host, allow_remote_stop=False)
 
 
 if __name__ == '__main__':

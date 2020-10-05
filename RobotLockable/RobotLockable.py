@@ -25,7 +25,7 @@ class RobotLockable:
                                   resource_list_file=resource_list_file,
                                   lock_folder=lock_folder)
 
-    def lock(self, requirements, timeout_s=10):
+    def lock(self, requirements, timeout_s=0):
         """
         Lock resource keyword
         Usage example:
