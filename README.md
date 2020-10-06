@@ -46,11 +46,24 @@ Options:
 
 # Run Remote Server In Docker Container
 
-Docker container can be run using command below. In this example `resource.json` file is located in the folder `/example`. Replace paths to folder according to the structure of your project:
+Docker container is run using command below. Replace path to resource.json and hostname with project specific values:
 
     docker run \
       -p 8270:8270 \
-      -v <local path to the resource.json folder>:/example/resource.json \
+      -v <local path to the resource.json folder>:/<path to resource.json folder> \
       jussiva/robot-lockable:latest \
-      --resources_list_file /example/resource.json
-      --host 0.0.0.0
+      --resources_list_file <path to resource.json folder>
+      --hostname $(hostname)
+
+## Full example
+
+To run example resource allocator located in this repository, docker run command is:
+
+  docker run \
+    -p 8270:8270 \
+    -v $PWD/example:/example/ \
+    --rm \
+    jussiva/robot-lockable:latest \
+    --resources_list_file /example/resource.json \
+    --hostname hostname
+
