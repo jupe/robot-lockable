@@ -1,8 +1,9 @@
-# robot-lockable
+# Robot Framework Remote Resource Allocator
 
-Resource locking module. Provide remote keywords and local keywords.
+Resource locking library for Robot Framework.
 
 # Usage
+
 Library import
 ```
 Library     RobotLockable       lock_folder=.   resource_list_file=example/resource.json    (hostname=hostname)
@@ -42,3 +43,14 @@ Options:
   --doc TEXT                  generate documentation. E.g. doc.html or list
   --help                      Show this message and exit.
 ```
+
+# Run Remote Server In Docker Container
+
+Docker container can be run using command below. In this example `resource.json` file is located in the folder `/example`. Replace paths to folder according to the structure of your project:
+
+    docker run \
+      -p 8270:8270 \
+      -v <local path to the resource.json folder>:/example/resource.json \
+      jussiva/robot-lockable:latest \
+      --resources_list_file /example/resource.json
+      --host 0.0.0.0
