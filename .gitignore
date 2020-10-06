@@ -8,6 +8,7 @@ build
 dist
 *.egg-info
 *.pyc
+venv
 
 # IDE Specific files
 ### Pycharm IDE - Jetbrains
@@ -27,3 +28,7 @@ local.properties
 
 Pipfile.lock
 *.lock
+
+# Robot Framework results
+*.xml
+*.html
