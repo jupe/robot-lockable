@@ -59,11 +59,11 @@ Docker container is run using command below. Replace path to resource.json and h
 
 To run example resource allocator located in this repository, docker run command is:
 
-  docker run \
-    -p 8270:8270 \
-    -v $PWD/example:/example/ \
-    --rm \
-    jussiva/robot-lockable:latest \
-    --resources_list_file /example/resource.json \
-    --hostname hostname
+    docker run \
+      -p 8270:8270 \
+      -v $PWD/example:/example/ \
+      --rm \
+      jussiva/robot-lockable:latest \
+      --resources_list_file /example/resource.json \
+      --hostname hostname
 
