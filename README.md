@@ -53,7 +53,8 @@ Docker container is run using command below. Replace path to resource.json and h
       -v <local path to the resource.json folder>:/<path to resource.json folder> \
       --hostname $(hostname) \
       jussiva/robot-lockable:latest \
-      --resources_list_file <path to resource.json folder>
+      --resources_list_file <path to resource.json folder> \
+      --host 0.0.0.0
 
 ## Full example
 
@@ -65,4 +66,5 @@ To run example resource allocator located in this repository, docker run command
       --hostname hostname \
       --rm \
       jussiva/robot-lockable:latest \
-      --resources_list_file /example/resource.json
+      --resources_list_file /example/resource.json \
+      --host 0.0.0.0
