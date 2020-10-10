@@ -64,7 +64,7 @@ def generate_doc(doc):
 @click.option('--host', default='127.0.0.1', help='Interface to listen. '
                                                   'Use "0.0.0.0" to get access from external machines')
 @click.option('--hostname', default=socket.gethostname(), help='Hostname')
-@click.option('--resources_list_file', default='resource.json', help='Resources list file')
+@click.option('--resources_list_file', default=None, help='Resources list file. Required.')
 @click.option('--lock_folder', default='.', help='Lock folder')
 @click.option('--doc', help='generate documentation. E.g. doc.html or list')
 # pylint:disable=too-many-arguments

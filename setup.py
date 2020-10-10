@@ -39,7 +39,7 @@ setup(
     setup_requires=["setuptools_scm"],
     install_requires=[
         "robotframework",
-        "lockable==0.2.0",
+        "lockable==0.3.0",
         "click",
         "retry",
         "robotremoteserver",

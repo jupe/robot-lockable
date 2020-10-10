@@ -54,7 +54,4 @@ class TestRobotLockable(unittest.TestCase):
 
     def test_doc_gen(self):
         html_file = abspath(join(root_dir, 'api.html'))
-        cur_dir = os.getcwd()
-        os.chdir(join(root_dir, 'example'))
         self.assertEqual(generate_doc(html_file), 0)
-        os.chdir(cur_dir)
