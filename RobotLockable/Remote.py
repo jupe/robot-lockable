@@ -7,7 +7,6 @@ import time
 import socket
 import tempfile
 import sys
-from datetime import datetime
 import logging
 import click
 from robotremoteserver import RobotRemoteServer
@@ -55,7 +54,7 @@ class RemoteLockable:
         """
         info = self._lockable.lock(requirements, timeout_s).resource_info
         # pylint: disable=logging-fstring-interpolation
-        logger.info(f'{datetime.now()} resource locked: {json.dumps(info)}')
+        logger.info(f'resource locked: {json.dumps(info)}')
         return info
 
     def load_resources_list(self, resources_list):
@@ -72,7 +71,7 @@ class RemoteLockable:
         :return: None
         """
         # pylint: disable=logging-fstring-interpolation
-        logger.info(f'{datetime.now()} resource unlocked: {json.dumps(resource)}')
+        logger.info(f'resource unlocked: {json.dumps(resource)}')
         self._lockable.unlock(resource)
 
 
