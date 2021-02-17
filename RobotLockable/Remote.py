@@ -1,13 +1,13 @@
 """
 Robot-Remote library for remote lockable resources
 """
-import datetime
 import json
 import subprocess
 import time
 import socket
 import tempfile
 import sys
+from datetime import datetime
 import click
 import logging
 from robotremoteserver import RobotRemoteServer

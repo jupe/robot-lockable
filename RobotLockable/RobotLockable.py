@@ -4,7 +4,7 @@ Locking keywords for robot-framework for local usage
 import socket
 import tempfile
 import json
-import datetime
+from datetime import datetime
 from lockable import Lockable
 from RobotLockable import __version__
 
