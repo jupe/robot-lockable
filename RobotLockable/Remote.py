@@ -18,7 +18,7 @@ logger = logging.getLogger('Remote')  # pylint: disable=invalid-name
 
 def setup_logger(filename):
     """ Initialise logger instance """
-    global logger  # pylint: disable=global-statement
+    global logger  # pylint: disable=global-statement,invalid-name
     logger.setLevel(logging.INFO)
     # pylint: disable=logging-fstring-interpolation
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -54,6 +54,7 @@ class RemoteLockable:
         :return: resource info object
         """
         info = self._lockable.lock(requirements, timeout_s).resource_info
+        # pylint: disable=logging-fstring-interpolation
         logger.info(f'{datetime.now()} resource locked: {json.dumps(info)}')
         return info
 
@@ -70,6 +71,7 @@ class RemoteLockable:
         :param resource: resource object to be release. Should contains at least `id` -property.
         :return: None
         """
+        # pylint: disable=logging-fstring-interpolation
         logger.info(f'{datetime.now()} resource unlocked: {json.dumps(resource)}')
         self._lockable.unlock(resource)
 
