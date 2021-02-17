@@ -5,7 +5,6 @@ import os
 from threading import Thread
 from contextlib import contextmanager
 import requests
-import subprocess
 from requests.exceptions import ConnectionError, HTTPError
 from retry import retry
 from robot import run as run_robot
