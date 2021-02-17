@@ -4,6 +4,7 @@ Locking keywords for robot-framework for local usage
 import socket
 import tempfile
 import json
+import datetime
 from lockable import Lockable
 from RobotLockable import __version__
 
@@ -39,7 +40,7 @@ class RobotLockable:
         :return: Resource object
         """
         info = self._lockable.lock(requirements, timeout_s).resource_info
-        print(f'resource: {json.dumps(info)}')
+        print(f'{datetime.now()} resource locked: {json.dumps(info)}')
         return info
 
     def unlock(self, resource):
@@ -48,5 +49,5 @@ class RobotLockable:
         :param resource: resource object. Should contains at least 'id' -property
         :return: None
         """
-        print(f'resource: {json.dumps(resource)}')
+        print(f'{datetime.now()} resource unlocked: {json.dumps(resource)}')
         self._lockable.unlock(resource)
