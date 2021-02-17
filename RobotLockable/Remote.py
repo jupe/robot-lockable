@@ -8,27 +8,29 @@ import socket
 import tempfile
 import sys
 from datetime import datetime
-import click
 import logging
+import click
 from robotremoteserver import RobotRemoteServer
 from lockable import Lockable
 
-logger = logging.getLogger('Remote')
+logger = logging.getLogger('Remote')  # pylint: disable=invalid-name
 
 
 def setup_logger(filename):
-    global logger
+    """ Initialise logger instance """
+    global logger  # pylint: disable=global-statement
     logger.setLevel(logging.INFO)
+    # pylint: disable=logging-fstring-interpolation
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     if filename:
-        fh = logging.FileHandler('remote.log')
-        fh.setLevel(logging.DEBUG)
-        fh.setFormatter(formatter)
-        logger.addHandler(fh)
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.INFO)
-    ch.setFormatter(formatter)
-    logger.addHandler(ch)
+        file_handle = logging.FileHandler('remote.log')
+        file_handle.setLevel(logging.DEBUG)
+        file_handle.setFormatter(formatter)
+        logger.addHandler(file_handle)
+    console_handle = logging.StreamHandler()
+    console_handle.setLevel(logging.INFO)
+    console_handle.setFormatter(formatter)
+    logger.addHandler(console_handle)
 
 
 class RemoteLockable:
