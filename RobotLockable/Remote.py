@@ -1,7 +1,8 @@
 """
 Robot-Remote library for remote lockable resources
 """
-
+import datetime
+import json
 import subprocess
 import time
 import socket
@@ -9,7 +10,6 @@ import tempfile
 import sys
 import click
 from robotremoteserver import RobotRemoteServer
-from robot.api import logger
 from lockable import Lockable
 
 
@@ -24,7 +24,7 @@ class RemoteLockable:
         self._lockable = Lockable(hostname=hostname,
                                   resource_list_file=resource_list_file,
                                   lock_folder=lock_folder)
-        logger.info('Initialize server')
+        print('Initialize server..')
 
     def lock(self, requirements, timeout_s=60):
         """
@@ -33,7 +33,16 @@ class RemoteLockable:
         :param timeout_s: allocation timeout
         :return: resource info object
         """
-        return self._lockable.lock(requirements, timeout_s).resource_info
+        info = self._lockable.lock(requirements, timeout_s).resource_info
+        print(f'{datetime.now()} resource locked: {json.dumps(info)}')
+        return info
+
+    def load_resources_list(self, resources_list):
+        """
+        Load resources list info
+        :
+        """
+        self._lockable.load_resources_list(resources_list)
 
     def unlock(self, resource):
         """
@@ -41,7 +50,7 @@ class RemoteLockable:
         :param resource: resource object to be release. Should contains at least `id` -property.
         :return: None
         """
-        print('resource:', resource)
+        print(f'{datetime.now()} resource unlocked: {json.dumps(resource)}')
         self._lockable.unlock(resource)
 
 
