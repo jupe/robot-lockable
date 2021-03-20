@@ -42,7 +42,7 @@ setup(
         "lockable==0.3.1",
         "click",
         "retry",
-        "robotremoteserver",
+        "robotremoteserver @ git+https://github.com/jupe/PythonRemoteServer.git@88322fa3b7d605512bc4b9f6318b54a5486891b0",
         "asyncio"
     ],
     entry_points={

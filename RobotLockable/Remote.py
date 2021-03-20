@@ -1,16 +1,35 @@
 """
 Robot-Remote library for remote lockable resources
 """
-
+import json
 import subprocess
 import time
 import socket
 import tempfile
 import sys
+import logging
 import click
 from robotremoteserver import RobotRemoteServer
-from robot.api import logger
 from lockable import Lockable
+
+logger = logging.getLogger('Remote')  # pylint: disable=invalid-name
+
+
+def setup_logger(filename):
+    """ Initialise logger instance """
+    global logger  # pylint: disable=global-statement,invalid-name
+    logger.setLevel(logging.INFO)
+    # pylint: disable=logging-fstring-interpolation
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    if filename:
+        file_handle = logging.FileHandler('remote.log')
+        file_handle.setLevel(logging.DEBUG)
+        file_handle.setFormatter(formatter)
+        logger.addHandler(file_handle)
+    console_handle = logging.StreamHandler()
+    console_handle.setLevel(logging.INFO)
+    console_handle.setFormatter(formatter)
+    logger.addHandler(console_handle)
 
 
 class RemoteLockable:
@@ -21,10 +40,10 @@ class RemoteLockable:
     def __init__(self, hostname=socket.gethostname(),
                  resource_list_file="resource.json",
                  lock_folder=tempfile.gettempdir()):
+        logger.info('Initialize server..')
         self._lockable = Lockable(hostname=hostname,
                                   resource_list_file=resource_list_file,
                                   lock_folder=lock_folder)
-        logger.info('Initialize server')
 
     def lock(self, requirements, timeout_s=60):
         """
@@ -33,7 +52,17 @@ class RemoteLockable:
         :param timeout_s: allocation timeout
         :return: resource info object
         """
-        return self._lockable.lock(requirements, timeout_s).resource_info
+        info = self._lockable.lock(requirements, timeout_s).resource_info
+        # pylint: disable=logging-fstring-interpolation
+        logger.info(f'resource locked: {json.dumps(info)}')
+        return info
+
+    def load_resources_list(self, resources_list):
+        """
+        Load resources list info
+        :
+        """
+        self._lockable.load_resources_list(resources_list)
 
     def unlock(self, resource):
         """
@@ -41,7 +70,8 @@ class RemoteLockable:
         :param resource: resource object to be release. Should contains at least `id` -property.
         :return: None
         """
-        print('resource:', resource)
+        # pylint: disable=logging-fstring-interpolation
+        logger.info(f'resource unlocked: {json.dumps(resource)}')
         self._lockable.unlock(resource)
 
 
@@ -67,11 +97,13 @@ def generate_doc(doc):
 @click.option('--resources_list_file', default=None, help='Resources list file. Required.')
 @click.option('--lock_folder', default='.', help='Lock folder')
 @click.option('--doc', help='generate documentation. E.g. doc.html or list')
+@click.option('--log', help='Log filename')
 # pylint:disable=too-many-arguments
-def main(port, host, hostname, resources_list_file, lock_folder, doc):
+def main(port, host, hostname, resources_list_file, lock_folder, doc, log):
     """ main function for remote plugin """
     if doc:
         sys.exit(generate_doc(doc))
+    setup_logger(log)
     remote = RemoteLockable(hostname=hostname, resource_list_file=resources_list_file, lock_folder=lock_folder)
     RobotRemoteServer(remote, port=port, host=host, allow_remote_stop=False)
 
