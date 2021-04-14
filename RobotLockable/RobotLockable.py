@@ -3,7 +3,7 @@ Locking keywords for robot-framework for local usage
 """
 import socket
 import tempfile
-from lockable import Lockable
+from lockable import Lockable, Allocation
 from RobotLockable import __version__
 
 
@@ -46,4 +46,8 @@ class RobotLockable:
         :return: None
         """
         print('resource:', resource)
-        self._lockable.unlock(resource)
+        allocation = Allocation(requirements=resource,
+                                resource_info=resource,
+                                _release=None,
+                                pid_file='')
+        self._lockable.unlock(allocation)
