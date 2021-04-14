@@ -37,7 +37,7 @@ class RobotLockable:
         :param timeout_s: timeout for allocation
         :return: Resource object
         """
-        return self._lockable.lock(requirements, timeout_s).resource_info
+        return self._lockable.lock(requirements, timeout_s).resource_info  # pylint: disable=duplicate-code
 
     def unlock(self, resource):
         """
