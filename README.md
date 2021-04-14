@@ -1,5 +1,8 @@
 # Robot Framework Remote Resource Allocator
 
+[![CircleCI](https://circleci.com/gh/jupe/robot-lockable/tree/master.svg?style=svg)](https://circleci.com/gh/jupe/robot-lockable/tree/master)
+[![PyPI version](https://badge.fury.io/py/robot-lockable.svg)](https://pypi.org/project/robot-lockable/)
+
 Resource locking library for Robot Framework.
 
 # Usage

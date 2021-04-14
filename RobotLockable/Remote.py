@@ -10,7 +10,7 @@ import sys
 import click
 from robotremoteserver import RobotRemoteServer
 from robot.api import logger
-from lockable import Lockable
+from lockable import Lockable, Allocation
 
 
 class RemoteLockable:
@@ -42,7 +42,11 @@ class RemoteLockable:
         :return: None
         """
         print('resource:', resource)
-        self._lockable.unlock(resource)
+        allocation = Allocation(requirements=resource,
+                                resource_info=resource,
+                                _release=None,
+                                pid_file='')
+        self._lockable.unlock(allocation)
 
 
 def generate_doc(doc):
