@@ -56,6 +56,7 @@ def generate_doc(doc):
     :return: 0 if success.
     """
     cmd = f"python -m robot.libdoc Remote::http://127.0.0.1:8270 {doc}"
+    # pylint: disable=consider-using-with
     server = subprocess.Popen(("python", __file__), stdout=subprocess.PIPE)
     time.sleep(1)
     gen = subprocess.run(cmd.split())  # pylint: disable=subprocess-run-check
